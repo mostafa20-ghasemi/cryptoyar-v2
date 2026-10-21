@@ -22,6 +22,12 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
+    - name: Fix private functions
+      run: |
+        sed -i 's/^    fun ema(/    private fun ema(/g' app/src/main/java/ir/cryptoyar/app/MainActivity.kt
+        sed -i 's/^    fun rsi(/    private fun rsi(/g' app/src/main/java/ir/cryptoyar/app/MainActivity.kt
+        sed -i 's/^    fun atr(/    private fun atr(/g' app/src/main/java/ir/cryptoyar/app/MainActivity.kt
+
     - name: Build APK
       run: |
         echo "sdk.dir=$ANDROID_HOME" > local.properties
