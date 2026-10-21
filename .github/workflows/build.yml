@@ -19,13 +19,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Gradle
+    - name: Generate Gradle Wrapper
       uses: gradle/actions/setup-gradle@v3
       with:
         gradle-version: 8.7
-
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
 
     - name: Build APK
       run: |
