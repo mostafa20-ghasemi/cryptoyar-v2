@@ -314,14 +314,14 @@ object Analyzer {
         Analysis(direction, confidence, price, reasons.joinToString("\n"), entryLow, entryHigh, sl, tp1, tp2, rr, atrVal, rsiVal)
     }
 
-    private fun ema(values: List<Double>, period: Int): Double {
+    fun ema(values: List<Double>, period: Int): Double {
         if (values.size < period) return values.last()
         val k = 2.0 / (period + 1); var e = values.take(period).average()
         for (i in period until values.size) e = values[i] * k + e * (1 - k)
         return e
     }
 
-    private fun rsi(values: List<Double>, period: Int): Double {
+    fun rsi(values: List<Double>, period: Int): Double {
         if (values.size < period + 1) return 50.0
         var gains = 0.0; var losses = 0.0
         for (i in 1..period) { val diff = values[i] - values[i - 1]; if (diff > 0) gains += diff else losses -= diff }
@@ -334,7 +334,7 @@ object Analyzer {
         return 100.0 - (100.0 / (1.0 + (avgGain / avgLoss)))
     }
 
-    private fun atr(highs: List<Double>, lows: List<Double>, closes: List<Double>, period: Int): Double {
+     fun atr(highs: List<Double>, lows: List<Double>, closes: List<Double>, period: Int): Double {
         if (closes.size < period + 1) return 1.0
         val trs = ArrayList<Double>(closes.size - 1)
         for (i in 1 until closes.size) trs.add(max(highs[i] - lows[i], max(abs(highs[i] - closes[i - 1]), abs(lows[i] - closes[i - 1]))))
